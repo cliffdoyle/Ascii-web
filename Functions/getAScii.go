@@ -34,9 +34,9 @@ func Ascii(input string, fontdata string) ([]string, error) {
 				concatLines[i] += artline
 			}
 		}
-		for _, art := range concatLines {
-			asciilines = append(asciilines, art)
-		}
+		// for _, art := range concatLines {
+			asciilines = append(asciilines, concatLines...)
+		// }
 
 	}
 	return asciilines, nil

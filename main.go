@@ -11,6 +11,7 @@ import (
 func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", backend.Webhandler)
+	mux.HandleFunc("/download",backend.DownloadHandler)
 	mux.HandleFunc("/submit", backend.HandleRequest)
 	fmt.Println("Server running on http://localhost:5000/")
 	err := http.ListenAndServe(":5000", mux)

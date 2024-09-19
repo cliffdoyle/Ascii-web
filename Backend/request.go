@@ -15,6 +15,8 @@ type TemplateData struct {
 	Fontfile string
 }
 
+var data TemplateData
+
 func HandleRequest(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/submit" {
 		http.Error(w, "404 not found", http.StatusNotFound)
@@ -39,7 +41,6 @@ func HandleRequest(w http.ResponseWriter, r *http.Request) {
 		}
 
 		asciiArt, err := functions.Ascii(input, fontFile)
-		
 		if err != nil {
 			if os.IsNotExist(err) {
 				http.Error(w, "500 Internal Server Error", http.StatusInternalServerError)
@@ -50,7 +51,7 @@ func HandleRequest(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 
-		data := TemplateData{
+		data = TemplateData{
 			Input:    input,
 			AsciiArt: asciiArt,
 			Fontfile: fontFile,
@@ -64,4 +65,16 @@ func HandleRequest(w http.ResponseWriter, r *http.Request) {
 		}
 
 	}
+}
+
+func DownloadHandler(w http.ResponseWriter, r *http.Request) {
+	res := ""
+	ascc := data.AsciiArt
+
+	for _, str := range ascc {
+		res += str + "\n"
+	}
+	w.Header().Set("Content-Disposition", "attachment; filename=sample")
+	w.Header().Set("Content-Type", "text/plain")
+	w.Write([]byte(res))
 }

@@ -31,14 +31,21 @@
             border-width: 10px;
             border-color: rgb(252, 215, 6);
         }
-        .butt{
-            color:rebeccapurple;
-            align-content: center;
-            width: 60px;
-            height: 30px;
-            border-radius:  10px 10px 10px 10px;
-            
-        }
+        .butt {
+    color: rebeccapurple;
+    background-color: lightgray; /* Add a background for visibility */
+    text-align: center;           /* Center text horizontally */
+    width: 100px;                 /* Adjust the width to fit "Download" */
+    height: 40px;                 /* Adjust the height */
+    border-radius: 10px;          /* Rounded corners */
+    line-height: 40px;            /* Vertically center the text */
+    font-weight: bold;            /* Make the text bold */
+    font-size: 16px;              /* Adjust the font size */
+    cursor: pointer;              /* Change cursor to pointer */
+    display: inline-block;        /* Make it inline-block so it's treated like a button */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Optional shadow for effect */
+}
+
        
     </style>
 </head>
@@ -62,14 +69,16 @@
     <br>
 
     <h2>Result Area</h2>
-    <div id="asciiResult" class="dj">
+    <form action="/download" method="POST">
+    <!-- <div id="asciiResult" class="dj"> -->
         {{ if .Input }}
-        <pre style="color:azure;">
+        <pre style="color:rgb(29, 30, 30);">
             {{range .AsciiArt}}{{ . }}
             {{ end }} 
 
         </pre>
         {{ end }}
-    </div>
+      <button type= "submit" class="butt" style="display: block; border-color: brown;">Download</button>
+    </form>
 </body>
 </html>
